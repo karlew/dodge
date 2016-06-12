@@ -181,17 +181,13 @@
     
     //手机平板类用重力感应事件
     window.addEventListener("deviceorientation", function(event){
-        if(event.gamma>=5&&event.gamma<=90){
-            star.speedX = 5;
-        }else if(event.gamma<=-5&&event.gamma>=-90){
-            star.speedX = -5;
+        if((event.gamma>=3&&event.gamma<=90)||(event.gamma<=-3&&event.gamma>=-90)){
+            star.speedX = 0.5*event.gamma;
         }else{
             star.speedX = 0;
         }
-        if(event.beta>=5&&event.beta<=90){
-            star.speedY = 5;
-        }else if(event.beta<=-5&&event.beta>=-90){
-            star.speedY = -5;
+        if((event.beta>=3&&event.beta<=90)||(event.beta<=-3&&event.beta>=-90)){
+            star.speedY = 0.5*event.beta;
         }else{
             star.speedY = 0;
         }
