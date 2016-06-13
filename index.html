@@ -147,35 +147,22 @@
 			ctx.fill();
         })
     }
-    
-    //PC端用键盘事件
-    document.onkeyup = function (event) {
-        var e = event || window.event;
-        var keyCode = e.keyCode || e.which;
-        if(keyCode==37||keyCode==39){
-            star.speedX = 0;
-        }else if(keyCode==38||keyCode==40){
-            star.speedY = 0;
+
+    //PC端用拖动事件
+    //不结合onmousedown和onmouseup做成拖动的原因在于拖动的时候setInterval速度会受影响，导致球体速度变慢
+    var dragFlag = false;
+    canvas.onclick = function(event){
+        x=event.clientX;
+        y=event.clientY;
+        if(Math.abs(x-star.x)<=star.size/2&&Math.abs(y-star.y)<=star.size/2){
+            dragFlag = true;
         }
+        console.log(dragFlag);
     }
-    document.onkeydown = function (event) {
-        var e = event || window.event;
-        var keyCode = e.keyCode || e.which;
-        switch (keyCode) {
-            case 37:
-                star.speedX = -5;
-                break;
-            case 38:
-                star.speedY = -5;
-                break;
-            case 39:
-                star.speedX = 5;
-                break;
-            case 40:
-                star.speedY = 5;
-                break;
-            default:
-                break;
+    canvas.onmousemove = function(){
+        if(dragFlag){
+            star.x=event.clientX;
+            star.y=event.clientY;
         }
     }
     
